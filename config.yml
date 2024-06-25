@@ -1,0 +1,18 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  user: dbuser
+  password: Dbuser@1234
+  url: jdbc:mysql://localhost:3308/todo_db
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate.show_sql: true
+    hibernate.format_sql: true
