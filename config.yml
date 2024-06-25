@@ -1,10 +1,3 @@
-server:
-  applicationConnectors:
-    - type: http
-      port: 8080
-  adminConnectors:
-    - type: http
-      port: 8081
 
 database:
   driverClass: com.mysql.cj.jdbc.Driver

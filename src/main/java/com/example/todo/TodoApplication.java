@@ -7,6 +7,7 @@ import com.example.todo.resources.TaskResource;
 
 public class TodoApplication extends Application<TodoConfiguration> {
     public static void main(String[] args) throws Exception {
+        System.out.println("Harshit is here");
         new TodoApplication().run(args);
     }
 

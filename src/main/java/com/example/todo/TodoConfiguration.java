@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import io.dropwizard.db.DataSourceFactory;
 
 public class TodoConfiguration extends Configuration {
+
     @Valid
     @NotNull
     @JsonProperty("database")
