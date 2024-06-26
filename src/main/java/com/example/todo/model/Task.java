@@ -3,6 +3,7 @@ package com.example.todo.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tasks")
@@ -16,14 +17,16 @@ public class Task {
 
     @NotNull
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startDate;
 
     @NotNull
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date targetDate;
 
     @NotNull
-    private String status;
+    private String status = "TODO"; // Default status is 'TODO'
 
     // Getters and setters
     public Long getId() {

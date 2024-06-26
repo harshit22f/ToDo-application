@@ -37,6 +37,7 @@ public class TaskResource {
     @POST
     public Response createTask(Task task) {
         task.setId(counter.incrementAndGet());
+        task.setStatus("TODO"); // Ensure status is set to 'TODO'
         taskList.add(task);
         return Response.status(Response.Status.CREATED).entity(task).build();
     }
@@ -52,7 +53,25 @@ public class TaskResource {
             task.setDescription(updatedTask.getDescription());
             task.setStartDate(updatedTask.getStartDate());
             task.setTargetDate(updatedTask.getTargetDate());
-            task.setStatus(updatedTask.getStatus());
+            // Do not update status here
+            return Response.ok(task).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @PUT
+    @Path("/{id}/status")
+    public Response updateTaskStatus(@PathParam("id") Long id, @QueryParam("status") String status) {
+        if (!"TODO".equals(status) && !"WIP".equals(status) && !"DONE".equals(status)) {
+            throw new WebApplicationException("Invalid status", 400);
+        }
+        Optional<Task> existingTask = taskList.stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst();
+        if (existingTask.isPresent()) {
+            Task task = existingTask.get();
+            task.setStatus(status);
             return Response.ok(task).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
